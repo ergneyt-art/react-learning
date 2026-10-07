@@ -23,6 +23,7 @@ const elements = (
     </div>
 );
 
-const app = document.getElementById("app"); 
+const app = ReactDOM.createRoot(document.getElementById("app"));
+app.render(elements);
 
-ReactDOM.render(elements, app);
+
