@@ -1,0 +1,45 @@
+.user-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.happy-user {
+  background-color: rgb(167, 219, 167);
+}
+
+.neutral-user {
+  background-color: rgb(220, 200, 162);
+}
+
+.sad-user {
+  background-color: rgb(228, 171, 171);
+}
+
+.user-card-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 16px;
+    gap: 8px;
+}
+
+.user-card-action {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user-card-action:hover {
+    background-color: #ddd;
+}
