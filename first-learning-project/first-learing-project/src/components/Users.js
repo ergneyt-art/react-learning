@@ -26,7 +26,7 @@ class Users extends React.Component {
 
     renderUser(user) {
         return (
-            <UserCard user={user} />
+            <UserCard onDelete={this.props.onDelete} onEdit={this.props.onEdit} user={user} />
         )
     }
 }

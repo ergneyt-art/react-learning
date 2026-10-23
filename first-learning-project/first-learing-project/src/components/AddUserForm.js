@@ -11,11 +11,13 @@ class AddUserForm extends React.Component {
             age: 0,
             happyness: 0
         }
+
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     render() {
         return (
-            <form className="add-user-form">
+            <form ref={(el) => this.userForm = el} className="add-user-form">
                 <h2>Add User</h2>
                 <div className="user-form-group">
                     <label className='user-form-label' htmlFor="name">Name:</label>
@@ -45,13 +47,14 @@ class AddUserForm extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        // const { Name, Email, Age, Happiness } = this.state;
         this.props.onAdd({
             name: this.state.name,
             email: this.state.email,
             age: this.state.age,
             happyness: this.state.happyness
         })
+
+        this.userForm.reset();
         // Handle form submission logic here
     }
 }

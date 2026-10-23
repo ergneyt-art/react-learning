@@ -13,6 +13,8 @@ class App extends React.Component {
       users: []
     };
     this.addUser = this.addUser.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
+    this.editUser = this.editUser.bind(this); 
   }
 
   render() {
@@ -36,13 +38,26 @@ class App extends React.Component {
         <ContainerHeader title="Welcome to my first React project!" />
         <p>This is a simple React application that demonstrates the basics of React.</p>
         <div className="users-section container">
-          <Users users={this.state.users} />
+          <Users users={this.state.users} onDelete={this.deleteUser} onEdit={this.editUser}/>
           <aside>
             <AddUserForm onAdd={this.addUser} />
           </aside>
         </div>
       </main>
     </div>)
+  }
+
+  deleteUser(id) {
+    this.setState({
+      users: this.state.users.filter((el) => el.id !== id)
+    });
+  }
+
+  editUser(user) {
+    let allUsers = this.state.users;
+    allUsers[allUsers.findIndex(el => el.id = user.id)] = user;
+    this.setState({users: allUsers});
+    console.log(user);
   }
 
   addUser(user) {
