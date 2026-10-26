@@ -5,10 +5,6 @@ import ContainerHeader from './ContainerHeader';
 import UserCard from './UserCard';
 
 class Users extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div>
@@ -26,7 +22,7 @@ class Users extends React.Component {
 
     renderUser(user) {
         return (
-            <UserCard onDelete={this.props.onDelete} onEdit={this.props.onEdit} user={user} />
+            <UserCard key={user.id} onDelete={this.props.onDelete} onEdit={this.props.onEdit} user={user} />
         )
     }
 }
