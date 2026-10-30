@@ -21,9 +21,18 @@
 
 # ----------------------
 
+# Создание проекта
+
+# 1. Create React APP
 # npx create-react-app [progect-name]
 # npx create-react-app .                // if you want create project in current folder
 # npm start or npm run dev              // Для сборки проекта
+
+# 2. Vite
+# npm create vite@latest
+# npm run dev
+
+
 # Ctrl + C (в активном терминале)       // Остановка сервера
 # npm i react-icons                     // библиотека для работы с иконками
 # npm i axios                           // библиотека для запросов

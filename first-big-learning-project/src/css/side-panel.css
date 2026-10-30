@@ -1,0 +1,10 @@
+.panel-list-items-container {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.panel-list-item {
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,12 @@
+.main-content-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.side-panel-container {
+  width: 20%;
+}
+
+.content-container {
+  flex: 1
+}
