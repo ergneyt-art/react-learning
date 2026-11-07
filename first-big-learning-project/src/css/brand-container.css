@@ -1,0 +1,24 @@
+.brand-container {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    
+}
+
+.logo-img {
+    width: 60%;
+    height: 90%;
+}
+
+.splitter {
+    width: 2px;
+}
+
+.brand-container p {
+    margin: 5px 0;
+    font-size: 1.15em;
+    /* color: darkblue; */
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}

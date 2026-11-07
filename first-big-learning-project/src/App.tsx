@@ -1,76 +1,69 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import SidePanel from "./components/SidePanel";
 import Footer from "./components/Footer";
 import Article from "./components/Article";
+import localizations from "./content.tsx";
 import "./App.css";
 
 function App() {
-  const [paragraphs, setParagraphs] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [lang, setLang] = useState('ENG');
+  const [currentArticleId, setCurrentArticleId] = useState<string | null>(null);
+
+  const localization = localizations.find((loc) => loc.key === lang.toLowerCase());
+  const articles = localization?.articles ?? [];
+  const globalNav = articles.map((article) => ({ key: article.id, title: article.title }));
+  const currentArticle = articles.find((article) => article.id === currentArticleId);
+  const localNav = currentArticle?.topics.map((topic, index) => ({
+    key: `${currentArticle.id}-topic-${index}`,
+    title: topic.title,
+  })) ?? [];
+
+  useEffect(() => {
+    if (currentArticleId) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [currentArticleId]);
+
 
   return (
-    <>
-      <Header header="This is header">Header paragraph</Header>
+    <div className={theme === 'light' ? 'light-mode' : 'dark-mode'}>
+      <Header localization={localization?.header} currentTheme={theme} onToggleLang={toggleLang} onToggleTheme={toggleTheme}></Header>
       <div className="main-content-container">
         <SidePanel
-          header="Right-panel"
-          items={["first", "second", "thrith"]}
+          header={localization?.leftPaneTitle ?? "Articles"}
+          items={globalNav}
+          itemClickHandler={setCurrentArticleId}
         ></SidePanel>
         <div className="content-container">
-          <button onClick={loadArticles} disabled={isLoading}>
-            {isLoading ? "Загрузка…" : "Загрузить статьи"}
-          </button>
-          {error && <p role="alert">{error}</p>}
-          {paragraphs.map((paragraph, index) => (
-            <Article
-              key={index}
-              hedaer={`Статья ${index + 1}`}
-              content={paragraph}
-            ></Article>
-          ))}
+          {currentArticle && <Article aricle={currentArticle} />}
         </div>
         <SidePanel
-          header="Left-panel"
-          items={["first", "second", "thrith"]}
+          header={localization?.rightPaneTitle ?? "Table of Contents"}
+          items={localNav}
+          itemClickHandler={scrollToElementById}
         ></SidePanel>
       </div>
       <Footer></Footer>
-    </>
+    </div>
   );
 
-  async function loadArticles() {
-    setIsLoading(true);
-    setError("");
-
-    try {
-      const response = await fetch(
-        "https://loremipsum-generator.org/api?type=lorem&paragraphs=3&format=json",
-      );
-      if (!response.ok) {
-        throw new Error(`Ошибка HTTP ${response.status} ${response.text()}`);
-      }
-
-      const data = await response.json();
-      const received: unknown = data.paragraphs;
-
-      if (
-        !Array.isArray(received) ||
-        !received.every((item): item is string => typeof item === "string")
-      ) {
-        throw new Error("Сервер вернул неожиданный формат данных");
-      }
-
-      setParagraphs(received);
-    } catch (error) {
-      setError(
-        error instanceof Error ? error.message : "Не удалось загрузить статьи",
-      );
-      console.log(error);
-    } finally {
-      setIsLoading(false);
+  function scrollToElementById(id: string) {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
     }
+  }
+
+  function toggleTheme() {
+    setTheme(previous => previous === 'light' ? 'dark' : 'light');
+    console.log("current theme: " + theme);
+  }
+
+  function toggleLang(value: string) {
+    setLang(value);
+    console.log("current lang: " + lang);
   }
 }
 

@@ -1,3 +1,33 @@
+.dark-mode {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.dark-mode input {
+  background-color: #a1b4dc;
+  color: #2b2a2a;
+}
+
+.dark-mode input:hover, .dark-mode input:focus {
+  background-color: #b9c4dc;
+  color: #2b2a2a;
+}
+
+.light-mode {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.light-mode input {
+  background-color: #3a3a3a;
+  color: #ebeaea;
+}
+
+.light-mode input:hover, .light-mode input:focus {
+  background-color: #4c4c4c;
+  color: #ffffff;
+}
+
 .main-content-container {
   display: flex;
   flex-direction: row;
